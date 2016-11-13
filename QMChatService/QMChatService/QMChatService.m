@@ -365,9 +365,8 @@ static NSString* const kQMChatServiceDomain = @"com.q-municate.chatservice";
     if (message.messageType == QMMessageTypeText) {
         
         BOOL shouldSaveDialog = NO;
-        
         //Update chat dialog in memory storage
-        if (chatDialogToUpdate == nil) {
+        if (chatDialogToUpdate == nil && [self.serviceManager isAuthorized]) {
             
             chatDialogToUpdate = [[QBChatDialog alloc] initWithDialogID:message.dialogID type:QBChatDialogTypePrivate];
             

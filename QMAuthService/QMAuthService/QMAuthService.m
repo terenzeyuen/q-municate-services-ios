@@ -50,8 +50,11 @@ static NSString *const kQMTwitterAuthSocialProvider  = @"twitter";
     
     __weak __typeof(self)weakSelf = self;
     
-    weakSelf.isAuthorized = NO;
+    BOOL isAuthorized = self.isAuthorized;
+    self.isAuthorized = NO;
+    
     QBRequest *request = [QBRequest logOutWithSuccessBlock:^(QBResponse *response) {
+        
         //Notify subscribes about logout
         if ([weakSelf.multicastDelegate respondsToSelector:@selector(authServiceDidLogOut:)]) {
             [weakSelf.multicastDelegate authServiceDidLogOut:weakSelf];
@@ -64,6 +67,8 @@ static NSString *const kQMTwitterAuthSocialProvider  = @"twitter";
     } errorBlock:^(QBResponse *response) {
         
         [weakSelf.serviceManager handleErrorResponse:response];
+        
+        weakSelf.isAuthorized = isAuthorized;
         
         if (completion) {
             completion(response);
