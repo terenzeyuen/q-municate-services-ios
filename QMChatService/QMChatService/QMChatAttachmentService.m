@@ -66,13 +66,13 @@ static NSString* attachmentPath(QBChatAttachment *attachment) {
     NSData *imageData = UIImagePNGRepresentation(image);
     
     __weak __typeof(self)weakSelf = self;
-    [QBRequest TUploadFile:imageData fileName:@"attachment" contentType:@"image/png" isPublic:NO successBlock:^(QBResponse *response, QBCBlob *blob) {
+    [QBRequest TUploadFile:imageData fileName:@"attachment" contentType:@"image/png" isPublic:YES successBlock:^(QBResponse *response, QBCBlob *blob) {
         __typeof(weakSelf)strongSelf = weakSelf;
         
         QBChatAttachment *attachment = [QBChatAttachment new];
-        attachment.type = @"image";
+        attachment.type = @"photo";
         attachment.ID = blob.UID;
-        attachment.url = [blob privateUrl];
+        attachment.url = [[blob publicUrl] stringByReplacingOccurrencesOfString:@".json" withString:@""];
         
         message.attachments = @[attachment];
         message.text = @"Attachment image";
