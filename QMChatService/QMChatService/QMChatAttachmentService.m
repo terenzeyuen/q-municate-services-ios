@@ -70,7 +70,7 @@ static NSString* attachmentPath(QBChatAttachment *attachment) {
         __typeof(weakSelf)strongSelf = weakSelf;
         
         QBChatAttachment *attachment = [QBChatAttachment new];
-        attachment.type = @"photo";
+        attachment.type = @"image";
         attachment.ID = blob.UID;
         attachment.url = [[blob publicUrl] stringByReplacingOccurrencesOfString:@".json" withString:@""];
         
