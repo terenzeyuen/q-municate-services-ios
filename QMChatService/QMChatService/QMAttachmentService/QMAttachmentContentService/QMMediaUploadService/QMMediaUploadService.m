@@ -158,7 +158,7 @@
          [QBRequest TUploadFile:data
                        fileName:attachment.name
                     contentType:attachment.contentType
-                       isPublic:NO
+                       isPublic:YES
                    successBlock:^(QBResponse * _Nonnull response,
                                   QBCBlob * _Nonnull tBlob)
           {

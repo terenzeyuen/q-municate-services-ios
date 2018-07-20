@@ -302,7 +302,7 @@
                                }
                                else if (!error) {
                                    for (QBChatAttachment *attachment in message.attachments) {
-                                       attachment.url = attachment.remoteURL.absoluteString;
+                                       attachment.url = [attachment remoteURLWithToken:NO].absoluteString;
                                    }
                                    [chatService sendMessage:message
                                                    toDialog:dialog
