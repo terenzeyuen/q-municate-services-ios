@@ -301,9 +301,6 @@
                                    return;
                                }
                                else if (!error) {
-                                   for (QBChatAttachment *attachment in message.attachments) {
-                                       attachment.url = attachment.remoteURL.absoluteString;
-                                   }
                                    [chatService sendMessage:message
                                                    toDialog:dialog
                                               saveToHistory:YES
